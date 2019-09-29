@@ -46,7 +46,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
             <TextView
-                android:id="@+id/n_comics_textView"
+                android:id="@+id/name_textView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -55,13 +55,13 @@
                 android:textAlignment="viewStart"
                 android:textSize="20sp"
                 android:textColor="@color/colorText"
-                app:layout_constraintEnd_toStartOf="@+id/n_comics"
+                app:layout_constraintEnd_toStartOf="@+id/name"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/shop_info_title_textView" />
 
             <TextView
-                android:id="@+id/n_comics"
+                android:id="@+id/name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -72,11 +72,11 @@
                 android:textColor="@color/colorText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/n_comics_textView"
-                app:layout_constraintTop_toTopOf="@+id/n_comics_textView" />
+                app:layout_constraintStart_toEndOf="@+id/name_textView"
+                app:layout_constraintTop_toTopOf="@+id/name_textView" />
 
             <TextView
-                android:id="@+id/off_pay_textView"
+                android:id="@+id/email_textView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -85,13 +85,13 @@
                 android:textAlignment="viewStart"
                 android:textSize="20sp"
                 android:textColor="@color/colorText"
-                app:layout_constraintEnd_toStartOf="@+id/off_pay"
+                app:layout_constraintEnd_toStartOf="@+id/email"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/n_comics_textView" />
+                app:layout_constraintTop_toBottomOf="@+id/name_textView" />
 
             <TextView
-                android:id="@+id/off_pay"
+                android:id="@+id/email"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -102,11 +102,11 @@
                 android:textColor="@color/colorText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/off_pay_textView"
-                app:layout_constraintTop_toTopOf="@+id/off_pay_textView" />
+                app:layout_constraintStart_toEndOf="@+id/email_textView"
+                app:layout_constraintTop_toTopOf="@+id/email_textView" />
 
             <TextView
-                android:id="@+id/total_pay_textView"
+                android:id="@+id/birthdate_textView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -115,13 +115,13 @@
                 android:textAlignment="viewStart"
                 android:textSize="20sp"
                 android:textColor="@color/colorText"
-                app:layout_constraintEnd_toStartOf="@+id/total_pay"
+                app:layout_constraintEnd_toStartOf="@+id/birthdate"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/off_pay_textView" />
+                app:layout_constraintTop_toBottomOf="@+id/email_textView" />
 
             <TextView
-                android:id="@+id/total_pay"
+                android:id="@+id/birthdate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -132,8 +132,8 @@
                 android:textColor="@color/colorText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/total_pay_textView"
-                app:layout_constraintTop_toTopOf="@+id/total_pay_textView" />
+                app:layout_constraintStart_toEndOf="@+id/birthdate_textView"
+                app:layout_constraintTop_toTopOf="@+id/birthdate_textView" />
 
             <TextView
                 android:id="@+id/payment_info_title_textView"
@@ -149,7 +149,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/total_pay_textView" />
+                app:layout_constraintTop_toBottomOf="@+id/birthdate_textView" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/formulario_card_name"
@@ -200,7 +200,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:theme="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                app:layout_constraintEnd_toStartOf="@+id/n_comics"
+                app:layout_constraintEnd_toStartOf="@+id/name"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/formulario_card_number">

@@ -8,21 +8,18 @@ import com.google.gson.reflect.TypeToken;
 import com.igormeira.comics.model.ShopCar;
 import com.igormeira.comics.model.Comic;
 
-import java.math.BigDecimal;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
-public class Utils {
+public class SharePreference {
 
     SharedPreferences shref;
 
-    public Utils(Context context) {
+    public SharePreference(Context context) {
         shref = context.getSharedPreferences("MyPREFERENCES", Context.MODE_PRIVATE);
     }
 
-    public Utils() {}
+    public SharePreference() {}
 
     public void sharedAddComic(Comic comic) {
         SharedPreferences.Editor editor;
@@ -67,18 +64,6 @@ public class Utils {
     public String sharedGetComics() {
         String response = shref.getString("Comics" , null);
         return response;
-    }
-
-    public String currencyFormat(BigDecimal value) {
-        NumberFormat formatter = NumberFormat.getCurrencyInstance(Locale.US);
-        String formatted = formatter.format(value);
-        return formatted.replace("$", "$ ");
-    }
-
-    public String currencyNegativeFormat(BigDecimal value) {
-        NumberFormat formatter = NumberFormat.getCurrencyInstance(Locale.US);
-        String formatted = formatter.format(value);
-        return formatted.replace("$", "$ -");
     }
 
 }

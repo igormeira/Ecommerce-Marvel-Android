@@ -25,4 +25,13 @@
     <string name="error_get_comics_api">Não foi possível buscar os produtos da API</string>
     <string name="empty_car">Você ainda não possui itens em seu carrinho!</string>
     <string name="loading">Carregando...</string>
+    <string name="added_to_car">Adiconado ao carrinho!</string>
+    <string name="logout">Logout</string>
+    <string name="refresh">Refresh</string>
+    <string name="user_name">Nome:</string>
+    <string name="user_e_mail">E-mail:</string>
+    <string name="user_birthdate">Data de Nascimento:</string>
+    <string name="user_zipcode">CEP:</string>
+    <string name="user_phone">Telefone:</string>
+    <string name="user">User</string>
 </resources>

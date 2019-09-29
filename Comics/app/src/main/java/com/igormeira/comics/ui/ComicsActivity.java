@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -17,7 +19,7 @@ import com.igormeira.comics.retrofit.MarvelRetrofit;
 import com.igormeira.comics.retrofit.service.ComicService;
 import com.igormeira.comics.ui.recyclerview.adapter.ListComicsAdapter;
 import com.igormeira.comics.util.Dialogs;
-import com.igormeira.comics.util.Utils;
+import com.igormeira.comics.util.SharePreference;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -51,10 +53,35 @@ public class ComicsActivity extends AppCompatActivity {
         comics = new ArrayList<Comic>();
         rareNumber = 0;
 
-        configLstComics();
+        configListComics();
         configFabShopButton();
 
         searchComics();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_comics_toolbar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id) {
+            case R.id.comics_refresh:
+                searchComics();
+                return true;
+            case R.id.comics_logout:
+                logout();
+                return true;
+            case R.id.comics_user:
+                showUserInfo();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void searchComics() {
@@ -90,7 +117,7 @@ public class ComicsActivity extends AppCompatActivity {
             JSONArray jsonArray = objData.getJSONArray("results");
 
             rareLimit = (int) Math.round((double) jsonArray.length() * 0.12);
-            new Utils(this).sharedReset();
+            new SharePreference(this).sharedReset();
 
             if (jsonArray.length() > 0) {
                 for (int i = 0; i < jsonArray.length(); i++) {
@@ -130,7 +157,7 @@ public class ComicsActivity extends AppCompatActivity {
         return type;
     }
 
-    private void configLstComics() {
+    private void configListComics() {
         RecyclerView listComics = findViewById(R.id.activity_lista_comics);
         adapter = new ListComicsAdapter(this::openDetails, ComicsActivity.this);
         listComics.setAdapter(adapter);
@@ -149,6 +176,23 @@ public class ComicsActivity extends AppCompatActivity {
 
     private void openShopCar() {
         Intent intent = new Intent(ComicsActivity.this, ShopActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+
+    }
+
+    private void logout() {
+        new SharePreference(this).sharedReset();
+        this.finish();
+        Intent intent = new Intent(ComicsActivity.this, LoginActivity.class);
+        startActivity(intent);
+    }
+
+    private void showUserInfo() {
+        Intent intent = new Intent(ComicsActivity.this, UserActivity.class);
         startActivity(intent);
     }
 }

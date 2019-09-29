@@ -14,7 +14,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.igormeira.comics.R;
 import com.igormeira.comics.model.Comic;
-import com.igormeira.comics.util.Utils;
+import com.igormeira.comics.util.Currency;
+import com.igormeira.comics.util.SharePreference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +49,7 @@ public class ListShopAdapter extends RecyclerView.Adapter<ListShopAdapter.ViewHo
     }
 
     public void updateListShop(List<Comic> newComics) {
-        new Utils(context).sharedUpdateComics(newComics);
+        new SharePreference(context).sharedUpdateComics(newComics);
         notifyItemRangeRemoved(0, this.comics.size());
         this.comics.clear();
         this.comics.addAll(newComics);
@@ -58,7 +59,7 @@ public class ListShopAdapter extends RecyclerView.Adapter<ListShopAdapter.ViewHo
     private void remove(Comic comic) {
         List<Comic> comics;
         Gson gson = new Gson();
-        String response = new Utils(context).sharedGetComics();
+        String response = new SharePreference(context).sharedGetComics();
         if (response != null) {
             comics = gson.fromJson(response,
                     new TypeToken<List<Comic>>(){}.getType());
@@ -88,7 +89,7 @@ public class ListShopAdapter extends RecyclerView.Adapter<ListShopAdapter.ViewHo
 
         void attach(Comic comic) {
             titleField.setText(comic.getTitle());
-            priceField.setText(new Utils().currencyFormat(comic.getPrice()));
+            priceField.setText(new Currency().currencyFormat(comic.getPrice()));
             removeButton.setOnClickListener(v -> remove(comic));
         }
 

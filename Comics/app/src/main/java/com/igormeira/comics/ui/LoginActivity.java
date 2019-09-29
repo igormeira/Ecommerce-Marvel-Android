@@ -9,11 +9,14 @@ import android.widget.Button;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.igormeira.comics.R;
+import com.igormeira.comics.util.Validation;
+
+import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
 
     private Button loginButton;
-    private TextInputLayout emailField, passwordField;
+    public TextInputLayout emailField, passwordField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void configFields() {
         emailField = findViewById(R.id.email_editText);
+        passwordField = findViewById(R.id.password_editText);
     }
 
     private void configLoginButton() {
@@ -34,7 +38,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onButtonClick(View v){
+
         Intent myIntent = new Intent(LoginActivity.this, ComicsActivity.class);
         startActivity(myIntent);
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 }

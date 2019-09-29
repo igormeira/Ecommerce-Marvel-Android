@@ -3,57 +3,63 @@ package com.igormeira.comics;
 import android.app.Activity;
 
 import androidx.test.InstrumentationRegistry;
-import androidx.test.espresso.action.ViewActions;
 import androidx.test.rule.ActivityTestRule;
-import androidx.test.runner.AndroidJUnit4;
 import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry;
 
-import com.igormeira.comics.ui.ComicsActivity;
 import com.igormeira.comics.ui.LoginActivity;
-import com.igormeira.comics.ui.SplashScreenActivity;
+import com.igormeira.comics.ui.ShopActivity;
+import com.igormeira.comics.ui.UserActivity;
+import com.igormeira.comics.util.SharePreference;
 
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import java.util.Collection;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.runner.lifecycle.Stage.RESUMED;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-/**
- * Instrumented test, which will execute on an Android device.
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
- */
-@RunWith(AndroidJUnit4.class)
-public class LoginActivityTest {
+public class UserActivityTest {
 
     @Rule
-    public ActivityTestRule<LoginActivity> activityRule
-            = new ActivityTestRule<>(LoginActivity.class);
+    public ActivityTestRule<UserActivity> activityRule
+            = new ActivityTestRule<>(UserActivity.class);
 
     @Test
-    public void loginGoesToComics() {
-        onView(withId(R.id.login_button))
+    public void userGoesToShop() {
+        onView(withId(R.id.fab_shopcar_button_user))
                 .perform(click());
 
         Activity activity = getActivityInstance();
-        boolean expected = (activity instanceof ComicsActivity);
+        boolean expected = (activity instanceof ShopActivity);
+        assertTrue(expected);
+
+        String shared = new SharePreference(activity.getApplicationContext()).sharedGetComics();
+        assertEquals(null, shared);
+    }
+
+    @Test
+    public void goToLoginActivityWhenLogout() {
+        onView(withId(R.id.general_logout))
+                .perform(click());
+
+        Activity activity = getActivityInstance();
+        boolean expected = (activity instanceof LoginActivity);
         assertTrue(expected);
     }
 
     @Test
-    public void blockBackButton() {
-        onView(isRoot()).perform(ViewActions.pressBack());
+    public void userStay() {
+        onView(withId(R.id.general_user))
+                .perform(click());
 
         Activity activity = getActivityInstance();
-        boolean expected = (activity instanceof SplashScreenActivity);
-        assertFalse(expected);
+        boolean expected = (activity instanceof UserActivity);
+        assertTrue(expected);
     }
 
     public Activity getActivityInstance() {

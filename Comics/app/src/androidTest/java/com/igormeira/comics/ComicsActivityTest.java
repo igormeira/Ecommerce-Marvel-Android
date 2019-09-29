@@ -3,14 +3,17 @@ package com.igormeira.comics;
 import android.app.Activity;
 
 import androidx.test.InstrumentationRegistry;
+import androidx.test.espresso.action.ViewActions;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry;
 
 import com.igormeira.comics.ui.ComicDetailActivity;
 import com.igormeira.comics.ui.ComicsActivity;
+import com.igormeira.comics.ui.LoginActivity;
 import com.igormeira.comics.ui.ShopActivity;
-import com.igormeira.comics.util.Utils;
+import com.igormeira.comics.ui.UserActivity;
+import com.igormeira.comics.util.SharePreference;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -20,6 +23,7 @@ import java.util.Collection;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static androidx.test.runner.lifecycle.Stage.RESUMED;
@@ -42,7 +46,7 @@ public class ComicsActivityTest {
         boolean expected = (activity instanceof ShopActivity);
         assertTrue(expected);
 
-        String shared = new Utils(activity.getApplicationContext()).sharedGetComics();
+        String shared = new SharePreference(activity.getApplicationContext()).sharedGetComics();
         assertEquals(null, shared);
     }
 
@@ -55,8 +59,47 @@ public class ComicsActivityTest {
         boolean expected = (activity instanceof ComicDetailActivity);
         assertTrue(expected);
 
-        String shared = new Utils(activity.getApplicationContext()).sharedGetComics();
+        String shared = new SharePreference(activity.getApplicationContext()).sharedGetComics();
         assertEquals(null, shared);
+    }
+
+    @Test
+    public void blockBackButton() {
+        onView(isRoot()).perform(ViewActions.pressBack());
+
+        Activity activity = getActivityInstance();
+        boolean expected = (activity instanceof LoginActivity);
+        assertFalse(expected);
+    }
+
+    @Test
+    public void comicsGoesToUser() {
+        onView(withId(R.id.comics_user))
+                .perform(click());
+
+        Activity activity = getActivityInstance();
+        boolean expected = (activity instanceof UserActivity);
+        assertTrue(expected);
+    }
+
+    @Test
+    public void comicsGoesToLoginActivityWhenLogout() {
+        onView(withId(R.id.comics_logout))
+                .perform(click());
+
+        Activity activity = getActivityInstance();
+        boolean expected = (activity instanceof LoginActivity);
+        assertTrue(expected);
+    }
+
+    @Test
+    public void comicsRefresh() {
+        onView(withId(R.id.comics_refresh))
+                .perform(click());
+
+        Activity activity = getActivityInstance();
+        boolean expected = (activity instanceof ComicsActivity);
+        assertTrue(expected);
     }
 
     public Activity getActivityInstance() {

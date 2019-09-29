@@ -11,7 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.igormeira.comics.R;
 import com.igormeira.comics.model.Comic;
-import com.igormeira.comics.util.Utils;
+import com.igormeira.comics.util.Currency;
+import com.igormeira.comics.util.SharePreference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,7 +74,7 @@ public class ListComicsAdapter extends RecyclerView.Adapter<ListComicsAdapter.Vi
         void attach(Comic comic) {
             this.comic = comic;
             titleField.setText(comic.getTitle());
-            priceField.setText(new Utils().currencyFormat(comic.getPrice()));
+            priceField.setText(new Currency().currencyFormat(comic.getPrice()));
         }
 
     }

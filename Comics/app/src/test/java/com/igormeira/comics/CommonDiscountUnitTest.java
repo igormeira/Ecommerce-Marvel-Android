@@ -2,7 +2,6 @@ package com.igormeira.comics;
 
 import com.igormeira.comics.model.Comic;
 import com.igormeira.comics.model.discount.CommonDiscount;
-import com.igormeira.comics.model.discount.RareDiscount;
 
 import org.junit.Before;
 import org.junit.Test;

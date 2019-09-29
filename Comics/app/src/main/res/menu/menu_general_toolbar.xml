@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/general_user"
+        android:icon="@drawable/ic_action_user"
+        app:showAsAction="ifRoom|withText"
+        android:title="@string/user">
+    </item>
+    <item
+        android:id="@+id/general_logout"
+        android:icon="@drawable/ic_action_logout"
+        app:showAsAction="ifRoom|withText"
+        android:title="@string/logout">
+    </item>
+</menu>

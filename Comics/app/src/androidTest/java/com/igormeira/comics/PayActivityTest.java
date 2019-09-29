@@ -8,8 +8,10 @@ import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry;
 
+import com.igormeira.comics.ui.LoginActivity;
 import com.igormeira.comics.ui.PayActivity;
 import com.igormeira.comics.ui.ShippingActivity;
+import com.igormeira.comics.ui.UserActivity;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -26,6 +28,7 @@ import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static androidx.test.runner.lifecycle.Stage.RESUMED;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(AndroidJUnit4.class)
@@ -46,9 +49,9 @@ public class PayActivityTest {
 
     @Test
     public void settingIntentValues() {
-        onView(withId(R.id.n_comics)).check(matches(withText(String.valueOf(1))));
-        onView(withId(R.id.off_pay)).check(matches(withText("$ -0.00")));
-        onView(withId(R.id.total_pay)).check(matches(withText("$ 10.00")));
+        onView(withId(R.id.name)).check(matches(withText(String.valueOf(1))));
+        onView(withId(R.id.email)).check(matches(withText("$ -0.00")));
+        onView(withId(R.id.birthdate)).check(matches(withText("$ 10.00")));
     }
 
     @Test
@@ -58,6 +61,26 @@ public class PayActivityTest {
 
         Activity activity = getActivityInstance();
         boolean expected = (activity instanceof ShippingActivity);
+        assertTrue(expected);
+    }
+
+    @Test
+    public void goToLoginActivityWhenLogout() {
+        onView(withId(R.id.general_logout))
+                .perform(click());
+
+        Activity activity = getActivityInstance();
+        boolean expected = (activity instanceof LoginActivity);
+        assertTrue(expected);
+    }
+
+    @Test
+    public void payGoesToUser() {
+        onView(withId(R.id.general_user))
+                .perform(click());
+
+        Activity activity = getActivityInstance();
+        boolean expected = (activity instanceof UserActivity);
         assertTrue(expected);
     }
 

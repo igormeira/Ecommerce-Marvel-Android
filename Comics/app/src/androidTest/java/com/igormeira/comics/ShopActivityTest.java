@@ -8,10 +8,13 @@ import androidx.test.runner.AndroidJUnit4;
 import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry;
 
 import com.igormeira.comics.model.Comic;
+import com.igormeira.comics.ui.LoginActivity;
 import com.igormeira.comics.ui.PayActivity;
 import com.igormeira.comics.ui.ShopActivity;
-import com.igormeira.comics.util.Utils;
+import com.igormeira.comics.ui.UserActivity;
+import com.igormeira.comics.util.SharePreference;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -40,15 +43,17 @@ public class ShopActivityTest {
             = new ActivityTestRule<>(ShopActivity.class);
 
     @Before
-    public void initIntentValues() {
+    public void setUp() {
         comic = new Comic("X-Men", "Descrição", BigDecimal.TEN,
                 THUMBNAIL_PATH, "Comum");
 
-        new Utils(activityRule.getActivity().getApplicationContext()).sharedReset();
+        new SharePreference(activityRule.getActivity().getApplicationContext()).sharedAddComic(comic);
     }
 
     @Test
     public void shopNotGoesToPayWithEmptyShared() {
+        new SharePreference(activityRule.getActivity().getApplicationContext()).sharedReset();
+
         onView(withId(R.id.pay_button))
                 .perform(click());
 
@@ -58,8 +63,19 @@ public class ShopActivityTest {
     }
 
     @Test
+    public void removeComicFromShopCar() {
+        onView(withText(startsWith("Remover")))
+                .perform(click());
+
+        Activity activity = getActivityInstance();
+        boolean expected = (activity instanceof PayActivity);
+        assertFalse(expected);
+    }
+
+    @Test
     public void shopGoesToPay() {
-        new Utils(activityRule.getActivity().getApplicationContext()).sharedAddComic(comic);
+        onView(withId(R.id.pay_button))
+                .perform(click());
 
         Activity activity = getActivityInstance();
         boolean expected = (activity instanceof PayActivity);
@@ -67,15 +83,23 @@ public class ShopActivityTest {
     }
 
     @Test
-    public void removeComicFromShopCar() {
-        new Utils(activityRule.getActivity().getApplicationContext()).sharedAddComic(comic);
-
-        onView(withText(startsWith("Remover")))
+    public void goToLoginActivityWhenLogout() {
+        onView(withId(R.id.general_logout))
                 .perform(click());
 
         Activity activity = getActivityInstance();
-        boolean expected = (activity instanceof PayActivity);
-        assertFalse(expected);
+        boolean expected = (activity instanceof LoginActivity);
+        assertTrue(expected);
+    }
+
+    @Test
+    public void shopGoesToUser() {
+        onView(withId(R.id.general_user))
+                .perform(click());
+
+        Activity activity = getActivityInstance();
+        boolean expected = (activity instanceof UserActivity);
+        assertTrue(expected);
     }
 
     public Activity getActivityInstance() {
@@ -90,5 +114,10 @@ public class ShopActivityTest {
         });
 
         return activity[0];
+    }
+
+    @After
+    public void tearDown() {
+        new SharePreference(activityRule.getActivity().getApplicationContext()).sharedReset();
     }
 }

@@ -13,7 +13,7 @@ import com.igormeira.comics.ui.ComicDetailActivity;
 import com.igormeira.comics.ui.LoginActivity;
 import com.igormeira.comics.ui.ShopActivity;
 import com.igormeira.comics.ui.UserActivity;
-import com.igormeira.comics.util.SharePreference;
+import com.igormeira.comics.util.SharedPreference;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -49,7 +49,7 @@ public class ComicDetailsActivityTest {
         intent.putExtra("Comic", comic);
         activityRule.launchActivity(intent);
 
-        new SharePreference(activityRule.getActivity().getApplicationContext()).sharedReset();
+        new SharedPreference(activityRule.getActivity().getApplicationContext()).sharedReset();
     }
 
     @Test
@@ -57,7 +57,7 @@ public class ComicDetailsActivityTest {
         onView(withId(R.id.buy_button))
                 .perform(click());
 
-        String shared = new SharePreference(activityRule.getActivity().getApplicationContext()).sharedGetComics();
+        String shared = new SharedPreference(activityRule.getActivity().getApplicationContext()).sharedGetComics();
         assertFalse(shared == null);
     }
 
@@ -70,7 +70,7 @@ public class ComicDetailsActivityTest {
         boolean expected = (activity instanceof ShopActivity);
         assertTrue(expected);
 
-        String shared = new SharePreference(activity.getApplicationContext()).sharedGetComics();
+        String shared = new SharedPreference(activity.getApplicationContext()).sharedGetComics();
         assertEquals(null, shared);
     }
 

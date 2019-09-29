@@ -11,10 +11,13 @@ import android.widget.TextView;
 
 import com.igormeira.comics.R;
 import com.igormeira.comics.util.Currency;
-import com.igormeira.comics.util.SharePreference;
+import com.igormeira.comics.util.SharedPreference;
 
 import java.math.BigDecimal;
 
+/**
+ * Activity responsável pelo pagamento da compra
+ */
 public class PayActivity extends AppCompatActivity {
 
     private int numberOfComics;
@@ -63,6 +66,9 @@ public class PayActivity extends AppCompatActivity {
         finishButton.setOnClickListener(v -> finishOrder());
     }
 
+    /**
+     * Chama ShippingActivity
+     */
     private void finishOrder() {
         Intent intent = new Intent(PayActivity.this, ShippingActivity.class);
         startActivity(intent);
@@ -84,13 +90,19 @@ public class PayActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
+    /**
+     * Realiza logout do usuário
+     */
     private void logout() {
-        new SharePreference(this).sharedReset();
+        new SharedPreference(this).sharedReset();
         this.finish();
         Intent intent = new Intent(PayActivity.this, LoginActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Chama UserActivity
+     */
     private void showUserInfo() {
         Intent intent = new Intent(PayActivity.this, UserActivity.class);
         startActivity(intent);

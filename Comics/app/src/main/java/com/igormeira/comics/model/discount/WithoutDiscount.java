@@ -5,6 +5,10 @@ import com.igormeira.comics.model.Comic;
 import java.math.BigDecimal;
 import java.util.List;
 
+/**
+ * Implementa a interface Discount.
+ * Não aplica descontos.
+ */
 public class WithoutDiscount implements Discount {
 
     BigDecimal total;

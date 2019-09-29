@@ -12,7 +12,7 @@ import com.igormeira.comics.ui.LoginActivity;
 import com.igormeira.comics.ui.PayActivity;
 import com.igormeira.comics.ui.ShopActivity;
 import com.igormeira.comics.ui.UserActivity;
-import com.igormeira.comics.util.SharePreference;
+import com.igormeira.comics.util.SharedPreference;
 
 import org.junit.After;
 import org.junit.Before;
@@ -47,12 +47,12 @@ public class ShopActivityTest {
         comic = new Comic("X-Men", "Descrição", BigDecimal.TEN,
                 THUMBNAIL_PATH, "Comum");
 
-        new SharePreference(activityRule.getActivity().getApplicationContext()).sharedAddComic(comic);
+        new SharedPreference(activityRule.getActivity().getApplicationContext()).sharedAddComic(comic);
     }
 
     @Test
     public void shopNotGoesToPayWithEmptyShared() {
-        new SharePreference(activityRule.getActivity().getApplicationContext()).sharedReset();
+        new SharedPreference(activityRule.getActivity().getApplicationContext()).sharedReset();
 
         onView(withId(R.id.pay_button))
                 .perform(click());
@@ -118,6 +118,6 @@ public class ShopActivityTest {
 
     @After
     public void tearDown() {
-        new SharePreference(activityRule.getActivity().getApplicationContext()).sharedReset();
+        new SharedPreference(activityRule.getActivity().getApplicationContext()).sharedReset();
     }
 }

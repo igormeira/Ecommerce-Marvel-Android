@@ -19,12 +19,15 @@ import com.igormeira.comics.model.discount.CommonDiscount;
 import com.igormeira.comics.model.discount.RareDiscount;
 import com.igormeira.comics.model.discount.WithoutDiscount;
 import com.igormeira.comics.ui.recyclerview.adapter.ListShopAdapter;
-import com.igormeira.comics.util.SharePreference;
+import com.igormeira.comics.util.SharedPreference;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Activity responsável por listar os itens no carrinho e aplicar os descontos.
+ */
 public class ShopActivity extends AppCompatActivity {
 
     Button payButton;
@@ -78,9 +81,14 @@ public class ShopActivity extends AppCompatActivity {
         payButton.setOnClickListener(v -> pay());
     }
 
+    /**
+     * Chama PayActivity.
+     * Aplica os descontos, caso houver.
+     * Passa as informações de número de itens, total de desconto e total.
+     */
     private void pay() {
         Gson gson = new Gson();
-        String response = new SharePreference(ShopActivity.this).sharedGetComics();
+        String response = new SharedPreference(ShopActivity.this).sharedGetComics();
         if (response != null) {
             comics = gson.fromJson(response,
                     new TypeToken<List<Comic>>(){}.getType());
@@ -118,9 +126,12 @@ public class ShopActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Atualiza lista do carrinho
+     */
     public void searchComics() {
         Gson gson = new Gson();
-        String response = new SharePreference(ShopActivity.this).sharedGetComics();
+        String response = new SharedPreference(ShopActivity.this).sharedGetComics();
         if (response != null) {
             comics = gson.fromJson(response,
                     new TypeToken<List<Comic>>(){}.getType());
@@ -130,6 +141,9 @@ public class ShopActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Mostra mensagem na tela
+     */
     private void emptyCarError() {
         Toast.makeText(ShopActivity.this,
                 R.string.empty_car,
@@ -147,13 +161,19 @@ public class ShopActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
+    /**
+     * Realiza logout do usuário
+     */
     private void logout() {
-        new SharePreference(this).sharedReset();
+        new SharedPreference(this).sharedReset();
         this.finish();
         Intent intent = new Intent(ShopActivity.this, LoginActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Chama UserActivity
+     */
     private void showUserInfo() {
         Intent intent = new Intent(ShopActivity.this, UserActivity.class);
         startActivity(intent);

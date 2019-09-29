@@ -1,7 +1,6 @@
 package com.igormeira.comics;
 
 import com.igormeira.comics.util.Currency;
-import com.igormeira.comics.util.SharePreference;
 
 import org.junit.Test;
 

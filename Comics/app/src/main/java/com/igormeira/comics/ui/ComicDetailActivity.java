@@ -16,12 +16,15 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.igormeira.comics.R;
 import com.igormeira.comics.model.Comic;
 import com.igormeira.comics.util.Currency;
-import com.igormeira.comics.util.SharePreference;
+import com.igormeira.comics.util.SharedPreference;
 import com.igormeira.comics.util.Text;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
+/**
+ * Activity para mostrar informações de uma comic.
+ */
 public class ComicDetailActivity extends AppCompatActivity {
 
     private TextView title, price, description;
@@ -66,6 +69,9 @@ public class ComicDetailActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Chama UserActivity.
+     */
     private void showUserInfo() {
         Intent intent = new Intent(ComicDetailActivity.this, UserActivity.class);
         startActivity(intent);
@@ -76,6 +82,9 @@ public class ComicDetailActivity extends AppCompatActivity {
         fabShopCar.setOnClickListener(v -> openShopCar());
     }
 
+    /**
+     * Chama ShopActivity.
+     */
     private void openShopCar() {
         Intent intent = new Intent(ComicDetailActivity.this, ShopActivity.class);
         startActivity(intent);
@@ -86,6 +95,9 @@ public class ComicDetailActivity extends AppCompatActivity {
         ComicDetailActivity.imageLoader.init(ImageLoaderConfiguration.createDefault(this));
     }
 
+    /**
+     * Atribui valores aos itens na tela.
+     */
     private void configDetails() {
         options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.mipmap.ic_launcher)
@@ -114,7 +126,7 @@ public class ComicDetailActivity extends AppCompatActivity {
     }
 
     public void onButtonClick(View v){
-        new SharePreference(this).sharedAddComic(comic);
+        new SharedPreference(this).sharedAddComic(comic);
         Toast.makeText(this,
                 R.string.added_to_car,
                 Toast.LENGTH_SHORT).show();
@@ -125,8 +137,11 @@ public class ComicDetailActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
+    /**
+     * Realiza logout do usuário
+     */
     private void logout() {
-        new SharePreference(this).sharedReset();
+        new SharedPreference(this).sharedReset();
         this.finish();
         Intent intent = new Intent(ComicDetailActivity.this, LoginActivity.class);
         startActivity(intent);

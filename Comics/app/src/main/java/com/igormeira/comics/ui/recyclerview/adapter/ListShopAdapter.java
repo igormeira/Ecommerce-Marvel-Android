@@ -15,17 +15,24 @@ import com.google.gson.reflect.TypeToken;
 import com.igormeira.comics.R;
 import com.igormeira.comics.model.Comic;
 import com.igormeira.comics.util.Currency;
-import com.igormeira.comics.util.SharePreference;
+import com.igormeira.comics.util.SharedPreference;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Adapter para listagem de HQs (comics) no carrinho
+ */
 public class ListShopAdapter extends RecyclerView.Adapter<ListShopAdapter.ViewHolder> {
 
     private final Context context;
     private final List<Comic> comics = new ArrayList<>();
 
+    /**
+     * Construtor da classe.
+     *
+     * @param context
+     */
     public ListShopAdapter(Context context) {
         this.context = context;
     }
@@ -48,8 +55,13 @@ public class ListShopAdapter extends RecyclerView.Adapter<ListShopAdapter.ViewHo
         return comics.size();
     }
 
+    /**
+     * Atualiza a lista mostrada
+     *
+     * @param newComics
+     */
     public void updateListShop(List<Comic> newComics) {
-        new SharePreference(context).sharedUpdateComics(newComics);
+        new SharedPreference(context).sharedUpdateComics(newComics);
         notifyItemRangeRemoved(0, this.comics.size());
         this.comics.clear();
         this.comics.addAll(newComics);
@@ -59,7 +71,7 @@ public class ListShopAdapter extends RecyclerView.Adapter<ListShopAdapter.ViewHo
     private void remove(Comic comic) {
         List<Comic> comics;
         Gson gson = new Gson();
-        String response = new SharePreference(context).sharedGetComics();
+        String response = new SharedPreference(context).sharedGetComics();
         if (response != null) {
             comics = gson.fromJson(response,
                     new TypeToken<List<Comic>>(){}.getType());
@@ -75,6 +87,10 @@ public class ListShopAdapter extends RecyclerView.Adapter<ListShopAdapter.ViewHo
 
     }
 
+    /**
+     * ViewHolder do adapter.
+     * Atribui os valores aos itens presentes na tela.
+     */
     class ViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView titleField, priceField;

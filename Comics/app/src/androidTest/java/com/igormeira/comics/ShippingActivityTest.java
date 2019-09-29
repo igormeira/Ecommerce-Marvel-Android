@@ -14,7 +14,7 @@ import com.igormeira.comics.ui.LoginActivity;
 import com.igormeira.comics.ui.PayActivity;
 import com.igormeira.comics.ui.ShippingActivity;
 import com.igormeira.comics.ui.UserActivity;
-import com.igormeira.comics.util.SharePreference;
+import com.igormeira.comics.util.SharedPreference;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -52,7 +52,7 @@ public class ShippingActivityTest {
     public void resetSharedPreferencesWhenBackToComics() {
         Comic comic = new Comic("X-Men", "Descrição", BigDecimal.TEN,
                 "", "Comum");
-        new SharePreference(activityRule.getActivity().getApplicationContext()).sharedAddComic(comic);
+        new SharedPreference(activityRule.getActivity().getApplicationContext()).sharedAddComic(comic);
 
         onView(withId(R.id.begin_button))
                 .perform(click());
@@ -61,7 +61,7 @@ public class ShippingActivityTest {
         boolean expected = (activity instanceof ComicsActivity);
         assertTrue(expected);
 
-        String shared = new SharePreference(activityRule.getActivity().getApplicationContext()).sharedGetComics();
+        String shared = new SharedPreference(activityRule.getActivity().getApplicationContext()).sharedGetComics();
         assertTrue(shared == null);
     }
 

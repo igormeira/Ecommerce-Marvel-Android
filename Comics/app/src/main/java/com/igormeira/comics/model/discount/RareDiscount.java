@@ -5,6 +5,10 @@ import com.igormeira.comics.model.Comic;
 import java.math.BigDecimal;
 import java.util.List;
 
+/**
+ * Implementa a interface Discount.
+ * Aplica descontos em comics com o tipo raro.
+ */
 public class RareDiscount implements Discount {
 
     BigDecimal total;

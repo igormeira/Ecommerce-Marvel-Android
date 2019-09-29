@@ -9,8 +9,11 @@ import android.view.MenuItem;
 import android.widget.Button;
 
 import com.igormeira.comics.R;
-import com.igormeira.comics.util.SharePreference;
+import com.igormeira.comics.util.SharedPreference;
 
+/**
+ * Activity que informa ao usuário que o produto está sendo enviado
+ */
 public class ShippingActivity extends AppCompatActivity {
 
     private Button startButton;
@@ -50,6 +53,9 @@ public class ShippingActivity extends AppCompatActivity {
         startButton.setOnClickListener(v -> goToBegin());
     }
 
+    /**
+     * Chama ComicsActivity
+     */
     private void goToBegin() {
         Intent intent = new Intent(ShippingActivity.this, ComicsActivity.class);
         startActivity(intent);
@@ -59,13 +65,19 @@ public class ShippingActivity extends AppCompatActivity {
     public void onBackPressed() {
     }
 
+    /**
+     * Realiza logout do usuário
+     */
     private void logout() {
-        new SharePreference(this).sharedReset();
+        new SharedPreference(this).sharedReset();
         this.finish();
         Intent intent = new Intent(ShippingActivity.this, LoginActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Chama UserActivity
+     */
     private void showUserInfo() {
         Intent intent = new Intent(ShippingActivity.this, UserActivity.class);
         startActivity(intent);

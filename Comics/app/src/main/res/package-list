@@ -1,0 +1,9 @@
+com.igormeira.comics
+com.igormeira.comics.asynctask
+com.igormeira.comics.model
+com.igormeira.comics.model.discount
+com.igormeira.comics.retrofit
+com.igormeira.comics.retrofit.service
+com.igormeira.comics.ui
+com.igormeira.comics.ui.recyclerview.adapter
+com.igormeira.comics.util

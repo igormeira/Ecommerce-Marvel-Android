@@ -9,10 +9,10 @@ import android.widget.Button;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.igormeira.comics.R;
-import com.igormeira.comics.util.Validation;
 
-import java.util.Objects;
-
+/**
+ * Activity que realiza login
+ */
 public class LoginActivity extends AppCompatActivity {
 
     private Button loginButton;
@@ -37,8 +37,12 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(this::onButtonClick);
     }
 
+    /**
+     * Chama ComicsActivity
+     *
+     * @param v
+     */
     public void onButtonClick(View v){
-
         Intent myIntent = new Intent(LoginActivity.this, ComicsActivity.class);
         startActivity(myIntent);
     }

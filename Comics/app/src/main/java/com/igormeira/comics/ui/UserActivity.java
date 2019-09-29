@@ -9,8 +9,11 @@ import android.view.MenuItem;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.igormeira.comics.R;
-import com.igormeira.comics.util.SharePreference;
+import com.igormeira.comics.util.SharedPreference;
 
+/**
+ * Activity responsável por exibir as informaçòes do usuário.
+ */
 public class UserActivity extends AppCompatActivity {
 
     @Override
@@ -45,6 +48,9 @@ public class UserActivity extends AppCompatActivity {
         fabShopCar.setOnClickListener(v -> openShopCar());
     }
 
+    /**
+     * Chama ShopActivity
+     */
     private void openShopCar() {
         Intent intent = new Intent(UserActivity.this, ShopActivity.class);
         startActivity(intent);
@@ -55,8 +61,11 @@ public class UserActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
+    /**
+     * Realiza logout do usuário
+     */
     private void logout() {
-        new SharePreference(this).sharedReset();
+        new SharedPreference(this).sharedReset();
         this.finish();
         Intent intent = new Intent(UserActivity.this, LoginActivity.class);
         startActivity(intent);

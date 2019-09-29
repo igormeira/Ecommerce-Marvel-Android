@@ -19,7 +19,7 @@ import com.igormeira.comics.retrofit.MarvelRetrofit;
 import com.igormeira.comics.retrofit.service.ComicService;
 import com.igormeira.comics.ui.recyclerview.adapter.ListComicsAdapter;
 import com.igormeira.comics.util.Dialogs;
-import com.igormeira.comics.util.SharePreference;
+import com.igormeira.comics.util.SharedPreference;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,6 +36,9 @@ import java.util.Random;
 import retrofit2.Call;
 import retrofit2.Response;
 
+/**
+ * Activity que lista as comics.
+ */
 public class ComicsActivity extends AppCompatActivity {
 
     private ListComicsAdapter adapter;
@@ -84,6 +87,9 @@ public class ComicsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Atualiza lista de comics.
+     */
     private void searchComics() {
         ComicService service = new MarvelRetrofit().getComicService();
         Call<Object> call = service.searchAll();
@@ -98,7 +104,7 @@ public class ComicsActivity extends AppCompatActivity {
         }, newComics -> {
             dialog.dismiss();
             if (comics.size() > 0) {
-                adapter.atualiza(comics);
+                adapter.updateListComics(comics);
             } else {
                 Toast.makeText(this,
                         R.string.error_get_comics_api,
@@ -107,6 +113,13 @@ public class ComicsActivity extends AppCompatActivity {
         }).execute();
     }
 
+    /**
+     * Recupera dados da Api
+     *
+     * @param call
+     * @throws IOException
+     * @throws JSONException
+     */
     private void getDataFromApi(Call<Object> call) throws IOException, JSONException {
         Response<Object> resposta = call.execute();
         String json = new Gson().toJson(resposta.body());
@@ -117,7 +130,7 @@ public class ComicsActivity extends AppCompatActivity {
             JSONArray jsonArray = objData.getJSONArray("results");
 
             rareLimit = (int) Math.round((double) jsonArray.length() * 0.12);
-            new SharePreference(this).sharedReset();
+            new SharedPreference(this).sharedReset();
 
             if (jsonArray.length() > 0) {
                 for (int i = 0; i < jsonArray.length(); i++) {
@@ -145,6 +158,11 @@ public class ComicsActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Retrona, randomicamente, o tipo da comic (Comum ou Raro).
+     *
+     * @return String
+     */
     private String randomType() {
         String type = "Comum";
 
@@ -163,6 +181,12 @@ public class ComicsActivity extends AppCompatActivity {
         listComics.setAdapter(adapter);
     }
 
+    /**
+     * Chama ComicDetailsActivity, passando a comic selecionada.
+     *
+     * @param posicao
+     * @param comic
+     */
     private void openDetails(int posicao, Comic comic) {
         Intent intent = new Intent(ComicsActivity.this, ComicDetailActivity.class);
         intent.putExtra("Comic", comic);
@@ -174,6 +198,9 @@ public class ComicsActivity extends AppCompatActivity {
         fabShopCar.setOnClickListener(v -> openShopCar());
     }
 
+    /**
+     * Chama ShopActivity.
+     */
     private void openShopCar() {
         Intent intent = new Intent(ComicsActivity.this, ShopActivity.class);
         startActivity(intent);
@@ -184,13 +211,19 @@ public class ComicsActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Realiza logout do usuário
+     */
     private void logout() {
-        new SharePreference(this).sharedReset();
+        new SharedPreference(this).sharedReset();
         this.finish();
         Intent intent = new Intent(ComicsActivity.this, LoginActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Chama UserActivity
+     */
     private void showUserInfo() {
         Intent intent = new Intent(ComicsActivity.this, UserActivity.class);
         startActivity(intent);

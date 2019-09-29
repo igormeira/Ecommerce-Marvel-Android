@@ -13,7 +13,7 @@ import com.igormeira.comics.ui.ComicsActivity;
 import com.igormeira.comics.ui.LoginActivity;
 import com.igormeira.comics.ui.ShopActivity;
 import com.igormeira.comics.ui.UserActivity;
-import com.igormeira.comics.util.SharePreference;
+import com.igormeira.comics.util.SharedPreference;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -46,7 +46,7 @@ public class ComicsActivityTest {
         boolean expected = (activity instanceof ShopActivity);
         assertTrue(expected);
 
-        String shared = new SharePreference(activity.getApplicationContext()).sharedGetComics();
+        String shared = new SharedPreference(activity.getApplicationContext()).sharedGetComics();
         assertEquals(null, shared);
     }
 
@@ -59,7 +59,7 @@ public class ComicsActivityTest {
         boolean expected = (activity instanceof ComicDetailActivity);
         assertTrue(expected);
 
-        String shared = new SharePreference(activity.getApplicationContext()).sharedGetComics();
+        String shared = new SharedPreference(activity.getApplicationContext()).sharedGetComics();
         assertEquals(null, shared);
     }
 

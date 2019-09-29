@@ -11,16 +11,32 @@ import com.igormeira.comics.model.Comic;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SharePreference {
+/**
+ * Classe responsável por guardar, recuperar e remover os itens do carrionho do usuário.
+ */
+public class SharedPreference {
 
     SharedPreferences shref;
 
-    public SharePreference(Context context) {
+    /**
+     * Construtor da classe.
+     *
+     * @param context
+     */
+    public SharedPreference(Context context) {
         shref = context.getSharedPreferences("MyPREFERENCES", Context.MODE_PRIVATE);
     }
 
-    public SharePreference() {}
+    /**
+     * Construtor da classe
+     */
+    public SharedPreference() {}
 
+    /**
+     * Adicionar item ao carrinho
+     *
+     * @param comic
+     */
     public void sharedAddComic(Comic comic) {
         SharedPreferences.Editor editor;
 
@@ -44,6 +60,11 @@ public class SharePreference {
         editor.commit();
     }
 
+    /**
+     * Atualiza itens do carrinho
+     *
+     * @param comics
+     */
     public void sharedUpdateComics(List<Comic> comics) {
         SharedPreferences.Editor editor;
         Gson gson = new Gson();
@@ -55,12 +76,20 @@ public class SharePreference {
         editor.commit();
     }
 
+    /**
+     * Remove todos itens do carrinho
+     */
     public void sharedReset() {
         SharedPreferences.Editor editor;
         editor = shref.edit();
         editor.remove("Comics").commit();
     }
 
+    /**
+     * Recupera itens do carrinho
+     *
+     * @return String
+     */
     public String sharedGetComics() {
         String response = shref.getString("Comics" , null);
         return response;

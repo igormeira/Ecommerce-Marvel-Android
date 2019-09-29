@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+/**
+ * Classe modelo para Comic.
+ */
 public class Comic implements Serializable {
 
     private final String title;
@@ -12,6 +15,15 @@ public class Comic implements Serializable {
     private final String thumbnail;
     private final String type;
 
+    /**
+     * Construtor para classe Comic.
+     *
+     * @param title
+     * @param description
+     * @param price
+     * @param thumbnail
+     * @param type
+     */
     public Comic(String title, String description, BigDecimal price,
                  String thumbnail, String type) {
         this.title = title;
@@ -21,22 +33,47 @@ public class Comic implements Serializable {
         this.type = type;
     }
 
+    /**
+     * Retorna o título (title).
+     *
+     * @return String
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * Retorna o preço (price).
+     *
+     * @return BigDecimal
+     */
     public BigDecimal getPrice() {
         return price;
     }
 
+    /**
+     * Retorna a thumbnail.
+     *
+     * @return String
+     */
     public String getThumbnail() {
         return thumbnail;
     }
 
+    /**
+     * Retorna a descrição (description).
+     *
+     * @return String
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Retorna o tipo (type).
+     *
+     * @return String
+     */
     public String getType() {
         return type;
     }

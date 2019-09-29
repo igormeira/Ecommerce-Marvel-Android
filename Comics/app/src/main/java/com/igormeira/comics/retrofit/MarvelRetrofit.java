@@ -7,11 +7,17 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * Classe que estabelece conexão com a Api
+ */
 public class MarvelRetrofit {
 
     private static final String URL_BASE = "http://gateway.marvel.com/v1/public/";
     private final ComicService comicService;
 
+    /**
+     * Construtor da calsse
+     */
     public MarvelRetrofit() {
         OkHttpClient client = configClient();
 

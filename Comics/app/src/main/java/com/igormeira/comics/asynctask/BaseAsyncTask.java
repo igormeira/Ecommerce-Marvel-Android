@@ -2,6 +2,11 @@ package com.igormeira.comics.asynctask;
 
 import android.os.AsyncTask;
 
+/**
+ * Classe responsável por executar atividades de maneira assincrona.
+ *
+ * @param <T>
+ */
 public class BaseAsyncTask<T> extends AsyncTask<Void, Void, T> {
 
     private final ExecuteListener<T> executeListener;

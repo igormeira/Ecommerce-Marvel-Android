@@ -2,6 +2,9 @@ package com.igormeira.comics.model;
 
 import java.util.Objects;
 
+/**
+ * Classe modelo para Address.
+ */
 public class Address {
 
     private String zipcode;
@@ -12,6 +15,17 @@ public class Address {
     private String state;
     private String city;
 
+    /**
+     * Construtor da calsse Address.
+     *
+     * @param zipcode
+     * @param street
+     * @param number
+     * @param complement
+     * @param country
+     * @param state
+     * @param city
+     */
     public Address(String zipcode, String street, int number, String complement, String country, String state, String city) {
         this.zipcode = zipcode;
         this.street = street;
@@ -22,61 +36,132 @@ public class Address {
         this.city = city;
     }
 
+    /**
+     * Recupera o cep (zipcode).
+     *
+     * @return String
+     */
     public String getZipcode() {
         return zipcode;
     }
 
+    /**
+     * Modifica o cep (zipcode).
+     *
+     * @param zipcode
+     */
     public void setZipcode(String zipcode) {
         this.zipcode = zipcode;
     }
 
+    /**
+     * Recupera a rua (street).
+     *
+     * @return String
+     */
     public String getStreet() {
         return street;
     }
 
+    /**
+     * Modifica a rua (street).
+     *
+     * @param street
+     */
     public void setStreet(String street) {
         this.street = street;
     }
 
+    /**
+     * Recupera o número (number).
+     *
+     * @return int
+     */
     public int getNumber() {
         return number;
     }
 
+    /**
+     * Modifica o número (number).
+     *
+     * @param number
+     */
     public void setNumber(int number) {
         this.number = number;
     }
 
+    /**
+     * Recupera o complemento do endereço (complement).
+     *
+     * @return String
+     */
     public String getComplement() {
         return complement;
     }
 
+    /**
+     * Modifica o complemento do endereço (complement).
+     *
+     * @param complement
+     */
     public void setComplement(String complement) {
         this.complement = complement;
     }
 
+    /**
+     * Recupera o país (country).
+     *
+     * @return String
+     */
     public String getCountry() {
         return country;
     }
 
+    /**
+     * Modifica o país (country).
+     *
+     * @param country
+     */
     public void setCountry(String country) {
         this.country = country;
     }
 
+    /**
+     * Recupera o estado (state).
+     *
+     * @return String
+     */
     public String getState() {
         return state;
     }
 
+    /**
+     * Modifica o estado (state).
+     *
+     * @param state
+     */
     public void setState(String state) {
         this.state = state;
     }
 
+    /**
+     * Recupera a cidade (city).
+     *
+     * @return String
+     */
     public String getCity() {
         return city;
     }
 
+    /**
+     * Modifica a cidade (city).
+     *
+     * @param city
+     */
     public void setCity(String city) {
         this.city = city;
     }
+
 
     @Override
     public boolean equals(Object o) {

@@ -12,17 +12,25 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.igormeira.comics.R;
 import com.igormeira.comics.model.Comic;
 import com.igormeira.comics.util.Currency;
-import com.igormeira.comics.util.SharePreference;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Adapter para listagem de HQs (comics)
+ */
 public class ListComicsAdapter extends RecyclerView.Adapter<ListComicsAdapter.ViewHolder> {
 
     private final OnItemClickListener onItemClickListener;
     private final Context context;
     private final List<Comic> comics = new ArrayList<>();
 
+    /**
+     * Construtor da classe
+     *
+     * @param onItemClickListener
+     * @param context
+     */
     public ListComicsAdapter(OnItemClickListener onItemClickListener, Context context) {
         this.onItemClickListener = onItemClickListener;
         this.context = context;
@@ -46,13 +54,22 @@ public class ListComicsAdapter extends RecyclerView.Adapter<ListComicsAdapter.Vi
         return comics.size();
     }
 
-    public void atualiza(List<Comic> produtos) {
+    /**
+     * Atualiza a lista mostrada
+     *
+     * @param comics
+     */
+    public void updateListComics(List<Comic> comics) {
         notifyItemRangeRemoved(0, this.comics.size());
         this.comics.clear();
-        this.comics.addAll(produtos);
+        this.comics.addAll(comics);
         this.notifyItemRangeInserted(0, this.comics.size());
     }
 
+    /**
+     * ViewHolder do adapter.
+     * Atribui os valores aos itens presentes na tela.
+     */
     class ViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView titleField;

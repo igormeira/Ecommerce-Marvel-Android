@@ -4,7 +4,7 @@ Desenvolvido para a plataforma Android. O aplicativo tem o objetivo de servir co
 
 ## Api utilizada:
 
-- ([link](https://developer.marvel.com))
+- ([https://developer.marvel.com](https://developer.marvel.com))
 
 ## Dependências:
 

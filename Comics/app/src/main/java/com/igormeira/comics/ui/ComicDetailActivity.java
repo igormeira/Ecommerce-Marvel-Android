@@ -59,7 +59,7 @@ public class ComicDetailActivity extends AppCompatActivity {
         description = findViewById(R.id.detalhes_descricao_textView);
         description.setText(comic.getDescription());
 
-        buyButton = findViewById(R.id.comprar_button);
+        buyButton = findViewById(R.id.buy_button);
 
         buyButton.setOnClickListener(this::onButtonClick);
 

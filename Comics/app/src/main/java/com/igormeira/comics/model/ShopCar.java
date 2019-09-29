@@ -1,6 +1,7 @@
 package com.igormeira.comics.model;
 
 import java.util.List;
+import java.util.Objects;
 
 public class ShopCar {
 
@@ -18,5 +19,16 @@ public class ShopCar {
         this.comics = comics;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ShopCar shopCar = (ShopCar) o;
+        return comics.equals(shopCar.comics);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(comics);
+    }
 }

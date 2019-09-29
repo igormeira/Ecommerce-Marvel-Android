@@ -55,31 +55,39 @@ public class ShopActivity extends AppCompatActivity {
     }
 
     private void pay() {
-        if (comics.size() > 0) {
-            BigDecimal totalWithoutDiscount = new WithoutDiscount().getDiscount(comics);
-            BigDecimal total;
-            BigDecimal discount;
+        Gson gson = new Gson();
+        String response = new Utils(ShopActivity.this).sharedGetComics();
+        if (response != null) {
+            comics = gson.fromJson(response,
+                    new TypeToken<List<Comic>>(){}.getType());
+            if (comics.size() > 0) {
+                BigDecimal totalWithoutDiscount = new WithoutDiscount().getDiscount(comics);
+                BigDecimal total;
+                BigDecimal discount;
 
-            String discountType = coupon.getText().toString();
-            switch (discountType) {
-                case "Raro":
-                    total = new RareDiscount().getDiscount(comics);
-                    break;
-                case "Comum":
-                    total = new CommonDiscount().getDiscount(comics);
-                    break;
-                default:
-                    total = totalWithoutDiscount;
-                    break;
+                String discountType = coupon.getText().toString();
+                switch (discountType) {
+                    case "Raro":
+                        total = new RareDiscount().getDiscount(comics);
+                        break;
+                    case "Comum":
+                        total = new CommonDiscount().getDiscount(comics);
+                        break;
+                    default:
+                        total = totalWithoutDiscount;
+                        break;
+                }
+
+                discount = totalWithoutDiscount.subtract(total);
+
+                Intent intent = new Intent(ShopActivity.this, PayActivity.class);
+                intent.putExtra("Comics", comics.size());
+                intent.putExtra("Total", total);
+                intent.putExtra("Discount", discount);
+                startActivity(intent);
+            } else {
+                emptyCarError();
             }
-
-            discount = totalWithoutDiscount.subtract(total);
-
-            Intent intent = new Intent(ShopActivity.this, PayActivity.class);
-            intent.putExtra("Comics", comics.size());
-            intent.putExtra("Total", total);
-            intent.putExtra("Discount", discount);
-            startActivity(intent);
         }
         else {
             emptyCarError();
@@ -95,12 +103,6 @@ public class ShopActivity extends AppCompatActivity {
             if (comics.size() > 0) {
                 adapter.updateListShop(comics);
             }
-            else {
-                emptyCarError();
-            }
-        }
-        else {
-            emptyCarError();
         }
     }
 

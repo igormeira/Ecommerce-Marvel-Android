@@ -143,8 +143,8 @@ public class ComicsActivity extends AppCompatActivity {
     }
 
     private void configFabShopButton() {
-        FloatingActionButton fabCarrinho = findViewById(R.id.activity_carrinho_button);
-        fabCarrinho.setOnClickListener(v -> openShopCar());
+        FloatingActionButton fabShopCar = findViewById(R.id.fab_shopcar_button);
+        fabShopCar.setOnClickListener(v -> openShopCar());
     }
 
     private void openShopCar() {

@@ -48,6 +48,7 @@ public class ListShopAdapter extends RecyclerView.Adapter<ListShopAdapter.ViewHo
     }
 
     public void updateListShop(List<Comic> newComics) {
+        new Utils(context).sharedUpdateComics(newComics);
         notifyItemRangeRemoved(0, this.comics.size());
         this.comics.clear();
         this.comics.addAll(newComics);
@@ -63,10 +64,9 @@ public class ListShopAdapter extends RecyclerView.Adapter<ListShopAdapter.ViewHo
                     new TypeToken<List<Comic>>(){}.getType());
             if (comics.size() > 0) {
                 for (int i = 0; i < comics.size(); i++) {
-                    if (comics.get(i).getTitle().equals(comic.getTitle())) {
+                    if (comics.get(i).equals(comic)) {
                         comics.remove(i);
                         updateListShop(comics);
-                        new Utils(context).sharedUpdateComics(comics);
                     }
                 }
             }

@@ -41,8 +41,6 @@ Desenvolvido para a plataforma Android. O aplicativo tem o objetivo de servir co
 
 ## Estrutura
 
-O projeto foi dividido seguindo o padrão MVVM, tentando sempre seprar bem as calsses lógicas das classes de interface e tentando manter o baixo acoplamento.
-
 ### asynctask
 
 - BaseAsyncTask: Classe responsável por executar atividades de maneira assincrona.
